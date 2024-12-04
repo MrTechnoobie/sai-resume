@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+const Home = lazy(() => import('./pages/Home'));
+const Interest = lazy(() => import('./pages/Interest'));
+const Skills = lazy(() => import('./pages/Skills'));
+const Experience = lazy(() => import('./pages/Experience'));
+const Achievements = lazy(() => import('./pages/Achievements'));
+const Education = lazy(() => import('./pages/Education'));
+const Freelance = lazy(() => import('./pages/Freelance'));
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/" element={<Home/>}></Route>
+        <Route path="/interest" element={<Interest/>}></Route>
+        <Route path="/skills" element={<Skills/>}></Route>
+        <Route path="/experience" element={<Experience/>}></Route>
+        <Route path="/freelance" element={<Freelance/>}></Route>
+        <Route path="/achievements" element={<Achievements/>}></Route>
+        <Route path="/education" element={<Education/>}></Route>
+      </Routes>
+      </Suspense>
+    </Router>
+  )
 }
 
 export default App;
